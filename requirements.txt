@@ -1,0 +1,7 @@
+
+libopencv-dev 
+cmake
+build-essential
+libpcl-dev
+ocl-icd-opencl-dev
+libqt5charts5-dev
