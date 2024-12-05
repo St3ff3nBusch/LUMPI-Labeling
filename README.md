@@ -1,8 +1,9 @@
 # LUMPI Labeling Tool
-<span id="operatin:tab"></span>
-<img src="images/operational_view.png" alt="Operational View" style="float: left;">
+
+<img id="operation-view" src="images/operational_view.png" alt="Operational View" style="max-width: 1080px; height: auto;">
 
 This tool is designed to label 3D bounding boxes in a point cloud with the use of different camera perspectives.
+
 It is configured to load the [LUMPI dataset](https://data.uni-hannover.de/en/dataset/lumpi)  and was used in the [labeling process](https://youtu.be/Ns6qsHsb06E).
 
 ## Content
@@ -26,11 +27,11 @@ Afterwards you could install this software by following these steps:
 
 ```
 $ git clone https://github.com/St3ff3nBusch/LUMPI-Labeling
+$ cd LUMPI-Labeling
 $ mkdir build
 $ cd build
-$ cmake <LUMPI-Labeling-Path>
-$ make
-$ ln -s <LUMPI-Labeling-Path> #This step is optional and is used to enable a dark color scheme for the tool.
+$ cmake ..
+$ make -j<numberOfCompilerThreads>
 $ ./Labeling
 ```
 
@@ -63,10 +64,10 @@ To get started quickly with the LUMPI test data:
 
 Use the operational tabs to inspect and work with the data:  
 
-### **Global View**  
-<p float="left">
-  <img src="images/global_view.png" alt="Operational View" >
-</p>
+### Global View 
+
+  <img src="images/global_view.png" alt="Operational View" style="max-width: 1080px; height: auto;">
+
 
 - Visualize the entire point cloud with its objects in a large point cloud viewer at the top.  
 - Get a global view of the trajectories at the bottom.  
@@ -74,7 +75,7 @@ Use the operational tabs to inspect and work with the data:
   - **Select objects**: Use Shift + click in the point cloud view or left-click in the trajectory view.  
   - **Add objects**: Click the **addObject** button and pick points in the global view.  
 
-### [**Operational View**](#operatin:tab)
+### [Operational View](#operation-view)
 - Visualize a sliding window with multiple views:  
   - **Point cloud viewer**  
   - **Camera viewer**  
@@ -90,14 +91,14 @@ Use the operational tabs to inspect and work with the data:
   - Mark as standing  
   - Mark/delete overlapping boxes  
 
-### **Trajectory View**  
+### Trajectory View
 - Inspect the smoothness of your tracks.  
 - Navigate to pose anomalies by left-clicking on a specific pose.  
 
-### **Global Camera View**  
-<p float="left">
-  <img src="images/camera_view.png" alt="Operational View" >
-</p>
+### Global Camera View  
+
+  <img src="images/camera_view.png" alt="Operational View" style="max-width: 1080px; height: auto;">
+
 
 - Observe the entire scene from different perspectives.  
 - Select objects by left-clicking.  
@@ -153,54 +154,6 @@ For our recommendations on efficiently fixing tracks, watch this [tutorial](http
 - Verify the bounding box and mask in the **Camera** tab.  
 - Review multiple objects and longer sequences by saving a video:  
   - Click **`generate video`** (choose an appropriate interval and frame rate). 
-## Best Practice  
-**Summary of best practices for different tasks**  
-
-### Track Extension  
-How to start labeling your sensor data or extend your labels with new object tracks.  
-For our recommendations on efficiently adding new tracks, watch this [tutorial](https://youtu.be/4CFBQkpRbls).  
-
-- Split existing tracks by clicking **split** and defining an offset to the existing track.  
-    - Add a track with a static offset in front, behind, left, or right of a track with identical bounding box dimensions.  
-    - Split a too large bounding box into two separate parallel moving objects.  
-- Add new objects:  
-  - Add objects when they enter the scene.  
-  - Jump to the point cloud index where they exit the scene and extrapolate the track.  
-  - Interpolate the track.  
-  - Go to an index between entry and exit, correct the pose, and interpolate again.  
-  - Gradually reduce the step size.  
-
-### Correction  
-How to correct tracking errors, track losses, identity switches, and pose jittering for stationary objects.  
-For our recommendations on efficiently fixing tracks, watch this [tutorial](https://youtu.be/CB34H1LOCZo).  
-
-- Select the track you want to edit in the **Global** or **Camera** tab.  
-- Switch to the **Operation** tab and begin with a high step size. We recommend:  
-  - **Step size 10** for vehicles (1 second).  
-  - **Step size 20** for bicycles (2 seconds).  
-  - **Step size 50** for pedestrians (5 seconds).  
-  - Increase the step size if the object is stationary.  
-- Review the entire track, focusing on the first and last pose:  
-  - If the track is too short, extrapolate it until the object is no longer identifiable in the point cloud.  
-  - If the track is too long or identity switches occurred, use the split option to shorten it.  
-- Adjust the box dimensions:  
-  - Begin at an index where the object is clearly visible.  
-  - Verify the dimension size across the entire track, considering the time offset between points.  
-- After defining the box size, start pose correction in the **Operation** tab:  
-  - Start with a higher step size, interpolate the track, then gradually reduce the step size until the desired frequency is reached.  
-  - Use interpolation whenever possible.  
-  - Mark stationary intervals by clicking `set standing`.  
-  - Adjust the box in bird’s-eye, side, or back views.  
-  - Align the heading first for accurate position determination.  
-- Check the **Trajectory** tab for inconsistencies, selecting your desired step size.  
-- Generate the image mask by aggregating the points of your track:  
-  - Click **generate model** (choose suitable start/end indices and step size; this may take time).  
-- Verify the bounding box and mask in the **Camera** tab.  
-- Review multiple objects and longer sequences by saving a video:  
-  - Click **generate video** (choose an appropriate interval and frame rate).  
-
-
-
 ## Adaptation  
 
 Feel free to adapt the code to suit your specific requirements and data. Below, we outline simple modifications to customize the tool:  
@@ -310,7 +263,7 @@ Finally delete the time adaption in the `aggregate_points(...)` method:
 ---			times.push_back(pc.points[i].adjustedtime);
 			}
 		}
----	    double th = 0.01 * pow(10, 6);
+---	    double th = 0.01 * sec2msec;
 ---		sort(times.begin(), times.end());
 ---		vector<vector<double>> segments(1);
 ---		segments.back().push_back(times.front());
@@ -323,15 +276,20 @@ Finally delete the time adaption in the `aggregate_points(...)` method:
 ---sort(segments.begin(), segments.end(), [](auto const &a, auto const &b) {
 ---			return a.size() > b.size();
 ---		});
----		p.time = accumulate(segments.front().begin(), segments.front().end(), 0.) / ((double) segments.front().size() * pow(10, 6));
+---		p.time = accumulate(segments.front().begin(), segments.front().end(), 0.) / (double) segments.front().size()*msec2sec;
 ---		p.visibility=times.size();
 ```
  </details>
 
 ## Development
 
+The code of this tool follows the Model-View-Controller pattern, check the [documentation](https://st3ff3nbusch.github.io/LUMPI-Labeling/annotated.html) for more details.
 
-If you are intressted in the development of this tool please contact [me](mailto:steffen.busch@ikg.uni-hannover.de).
+The easiest way to extend the functionality is to add a new button in the [LabelingView](include/view/LabelingView.h) and connect it to your own function via the [LabelingPresenter](include/presenter/LabelingPresenter.h)
+
+For extension of the context menu to add functionality for a single time index at the operational view, add QAction with the **context_menu_view_table** method.
+
+If you are interested in the development of this tool please contact [me](mailto:steffen.busch@ikg.uni-hannover.de).
 
 ## License
 
