@@ -1,12 +1,8 @@
 var searchData=
 [
-  ['_7eboundingbox_336',['~BoundingBox',['../classikg_1_1_bounding_box.html#a587de78331711c6eb6d15de867b73991',1,'ikg::BoundingBox']]],
-  ['_7efrustum_337',['~Frustum',['../classfrustum_1_1_frustum.html#acabedbd9237bcd4949f972b04d71f238',1,'frustum::Frustum']]],
-  ['_7elabeling_338',['~Labeling',['../classikg_1_1_labeling.html#adaa12a34a384b18af27f3d32f1f7cd7c',1,'ikg::Labeling']]],
-  ['_7elabelingpresenter_339',['~LabelingPresenter',['../classikg_1_1_labeling_presenter.html#a9ba455df50a9e5ca33c1544bb01aa7ec',1,'ikg::LabelingPresenter']]],
-  ['_7elabelingview_340',['~LabelingView',['../classikg_1_1_labeling_view.html#ad55917a81015c57003c519fad4dd1e5c',1,'ikg::LabelingView']]],
-  ['_7elumpipipeline_341',['~LUMPIPipeline',['../classikg_1_1_l_u_m_p_i_pipeline.html#af53f0145ab6317adc85ff7fd4c69615b',1,'ikg::LUMPIPipeline']]],
-  ['_7eplane_342',['~Plane',['../classfrustum_1_1_plane.html#a2686c65ce37522837949bf8b88276567',1,'frustum::Plane']]],
-  ['_7epose_343',['~Pose',['../classikg_1_1_pose.html#ad1f894406ef64632203ffd9138d32a0b',1,'ikg::Pose']]],
-  ['_7etrajectory_344',['~Trajectory',['../classikg_1_1_trajectory.html#ac673c37025ca5353ad99ab41c936e75d',1,'ikg::Trajectory']]]
+  ['z_0',['z',['../classikg_1_1_pose.html#a995a69841bede12eac0adc1deaa32543',1,'ikg::Pose::z'],['../struct_i_k_g_b.html#a81c639a2665b7c7ec354f97db007ef1b',1,'IKGB::z']]],
+  ['zoomback_1',['zoomBack',['../classikg_1_1_labeling.html#ad73d49a327d37bba2bc1e611662d0e90',1,'ikg::Labeling']]],
+  ['zoomcam_2',['zoomCam',['../classikg_1_1_labeling.html#a9e094ad35f876150f1e4ea235da35804',1,'ikg::Labeling']]],
+  ['zoomside_3',['zoomSide',['../classikg_1_1_labeling.html#a8a03f065b89c95e582bf072d42523731',1,'ikg::Labeling']]],
+  ['zoomtop_4',['zoomTop',['../classikg_1_1_labeling.html#aedbdfc06a87edc288da1b108842ae9b6',1,'ikg::Labeling']]]
 ];
