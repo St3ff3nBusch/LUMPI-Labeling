@@ -54,7 +54,7 @@ An general overview is given in this video [tutorial](https://youtu.be/wgPDjPjT0
 ## Quick Start: LUMPI Test Data  
 
 To get started quickly with the LUMPI test data:  
-1. Download the [LUMPI test data](https://data.uni-hannover.de:8080/dataset/upload/users/ikg/busch/LUMPI/test_data.zip)
+1. Download the [LUMPI test data](https://data.uni-hannover.de/vault/ikg/busch/LUMPI/test_data.zip)
 2. Press the **Load** button.  
 3. Choose your **ROOT-directory**.  
 4. Select your **Label.csv** file.  
